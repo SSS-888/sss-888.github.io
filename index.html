@@ -18,27 +18,58 @@
 
         .centered-content {
             text-align: center;
-            color: white;
-            font-size: 32px;
             position: relative;
         }
 
-        .centered-content .menu {
+        .title {
+            color: white;
+            font-size: 36px;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .title:hover {
+            color: red;
+        }
+
+        .menu-icon {
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: 0 auto;
+        }
+
+        .menu-icon div {
+            background-color: white;
+            height: 4px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-icon:hover div {
+            background-color: red;
+        }
+
+        .menu {
             display: none;
             position: absolute;
-            top: 60px;
+            top: 70px;
             left: 50%;
             transform: translateX(-50%);
             background-color: black;
-            padding: 0;
             list-style: none;
+            padding: 0;
             border: 1px solid white;
         }
 
         .menu li {
-            padding: 10px 20px;
+            padding: 15px 30px;
             color: white;
-            text-align: left;
+            text-align: center;
+            transition: background-color 0.3s ease;
         }
 
         .menu li:hover {
@@ -46,57 +77,51 @@
             cursor: pointer;
         }
 
-        .centered-content .toggle {
+        .menu a {
+            text-decoration: none;
             color: white;
-            font-size: 32px;
-            display: inline-block;
-            cursor: pointer;
+            display: block;
         }
 
-        .centered-content .toggle:hover {
-            color: red;
+        .menu a:hover {
+            color: white;
         }
     </style>
 </head>
 <body>
 
     <div class="centered-content">
-        Chernobyl Research Group <span class="toggle"> v </span>
+        <div class="title">Chernobyl Research Group</div>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
         <ul class="menu">
-            <li>Reports</li>
-            <li>Services</li>
-            <li>Contact Us</li>
-            <li>About Us</li>
+            <li><a href="reports.html">Reports</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="about.html">About Us</a></li>
         </ul>
     </div>
 
     <script>
-        const toggle = document.querySelector('.toggle');
         const menu = document.querySelector('.menu');
 
-        toggle.addEventListener('mouseover', () => {
-            toggle.style.color = 'red';
-            menu.style.display = 'block';
-        });
-
-        toggle.addEventListener('mouseout', () => {
-            toggle.style.color = 'white';
-        });
-
-        menu.addEventListener('mouseover', () => {
-            toggle.style.color = 'red';
-        });
-
-        menu.addEventListener('mouseout', () => {
-            toggle.style.color = 'white';
-            menu.style.display = 'none';
-        });
-
-        menu.addEventListener('click', (e) => {
-            if (e.target.tagName === 'LI') {
-                alert(`${e.target.textContent} page clicked!`); // Change this to actual page navigation.
+        function toggleMenu() {
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'block';
             }
-        });
+        }
+
+        // Hide the menu when clicking outside the menu or menu icon
+        window.onclick = function(event) {
+            if (!event.target.matches('.menu-icon, .menu-icon div')) {
+                menu.style.display = 'none';
+            }
+        }
     </script>
 
 </body>
